@@ -1,9 +1,13 @@
 package com.example.chengyonghui.mp3demo.model;
 
+import java.io.Serializable;
+
 /**
  * Created by chengyonghui on 2017/9/20.
  */
-public class Mp3Info {
+public class Mp3Info implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private String id;
     private String mp3Name;
     private String mp3Size;

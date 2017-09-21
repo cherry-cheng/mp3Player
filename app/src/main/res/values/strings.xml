@@ -2,4 +2,6 @@
     <string name="app_name">mp3Demo</string>
     <string name="mp3list.update">更新列表</string>
     <string name="mp3list.about">关于</string>
+    <string name="about">主菜单</string>
+    <string name="main">关于</string>
 </resources>

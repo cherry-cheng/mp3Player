@@ -1,6 +1,9 @@
 package com.example.chengyonghui.mp3demo.download;
 
+import com.example.chengyonghui.mp3demo.utils.FileUtils;
+
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -51,5 +54,43 @@ public class HttpDownloader {
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         InputStream inputStream = httpURLConnection.getInputStream();
         return inputStream;
+    }
+
+    /*
+下载任意形式的文件
+下载mp3文件
+得到当前设备SD卡的目录
+Environment.getExternalStorageDirectory()
+访问SD卡的权限：
+android.permission.WRITE_EXTERNAL_STORAGE
+fileName修改之后的文件名
+该函数返回-1：代表下载文件出错
+0代表文件下载成功
+1代表文件已经存在
+ */
+    public int downFile(String urlStr, String path, String fileName) {
+        InputStream inputStream = null;
+        try {
+            FileUtils fileSdcardUtil = new FileUtils();
+            if (fileSdcardUtil.isFileExist(fileName, path)) {
+                return 1;
+            } else {
+                inputStream = getInputStreamFromUrl(urlStr);
+                File resultFile = fileSdcardUtil.write2SDFromInput(path, fileName, inputStream);
+                if (resultFile == null) {
+                    return -1;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        } finally {
+            try {
+                inputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
     }
 }
