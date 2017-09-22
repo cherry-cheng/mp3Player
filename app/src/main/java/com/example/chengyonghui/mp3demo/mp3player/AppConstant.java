@@ -14,4 +14,6 @@ public class AppConstant {
         public static final String BASE_URL = "http://localhost:8080/mp3";
 
     }
+
+    public static final String LRC_MESSAGE_ACTION = "mp3demo.mp3player.lrcmessage.action";
 }
